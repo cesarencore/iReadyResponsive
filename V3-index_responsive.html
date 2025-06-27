@@ -21,6 +21,7 @@
         .header-content {
             flex-wrap: wrap;
             gap: 15px;
+            align-items: center;
         }
 
         .logo-image {
@@ -29,10 +30,20 @@
         }
 
         .nav-buttons {
+            display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px;
             align-items: center;
+            width: 100%;
+        }
+
+        .nav-buttons > span {
+            flex-basis: 100%;
+            text-align: center;
+            margin: 5px 0;
+            font-size: 12px;
+            order: -1;
         }
 
         .nav-btn {
@@ -40,6 +51,18 @@
             font-size: 14px;
             white-space: nowrap;
             min-width: fit-content;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
         }
 
         .voice-ai-banner {
@@ -50,6 +73,7 @@
             color: white;
             border-radius: 8px;
             transition: transform 0.3s ease;
+            order: 1;
         }
 
         .voice-ai-banner:hover {
@@ -122,8 +146,8 @@
             object-fit: contain;
         }
 
-        /* Mobile-specific optimizations */
-        @media (max-width: 768px) {
+        /* Mobile Portrait - Vertical orientation */
+        @media (max-width: 768px) and (orientation: portrait) {
             .container {
                 padding: 0 10px;
             }
@@ -132,37 +156,60 @@
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
+                gap: 10px;
             }
 
             .logo {
-                margin-bottom: 10px;
+                margin-bottom: 5px;
             }
 
             .nav-buttons {
                 width: 100%;
                 justify-content: center;
-                flex-wrap: wrap;
+                flex-direction: column;
+                gap: 10px;
             }
 
             .nav-buttons > span {
                 width: 100%;
                 text-align: center;
-                margin: 5px 0;
-                font-size: 12px;
+                margin: 0;
+                font-size: 11px;
+                color: #666;
+                font-weight: 500;
+            }
+
+            /* Button grid for portrait mobile */
+            .nav-buttons-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                width: 100%;
+                order: 1;
             }
 
             .nav-btn {
-                flex: 1;
-                min-width: calc(50% - 4px);
-                max-width: 120px;
-                font-size: 12px;
-                padding: 6px 8px;
+                font-size: 11px;
+                padding: 8px 6px;
+                text-align: center;
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1.2;
+            }
+
+            .nav-btn.supplemental {
+                grid-column: 1 / -1; /* Full width for long text */
+                font-size: 10px;
             }
 
             .voice-ai-banner {
                 width: 100%;
-                margin-top: 10px;
+                margin-top: 8px;
                 padding: 10px;
+                font-size: 11px;
+                order: 2;
             }
 
             .products-grid {
@@ -171,27 +218,122 @@
                 margin-bottom: 30px;
             }
 
-            .product-card {
-                padding: 15px;
-            }
-
-            .product-image {
-                max-height: 120px;
-            }
-
             .subjects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
-            }
-
-            .subject-card {
-                padding: 10px;
-                aspect-ratio: 1.1;
             }
         }
 
-        /* Small mobile devices */
-        @media (max-width: 480px) {
+        /* Mobile Landscape - Horizontal orientation */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .logo {
+                flex-shrink: 0;
+            }
+
+            .nav-buttons {
+                flex: 1;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                max-width: 60%;
+                gap: 6px;
+            }
+
+            .nav-buttons > span {
+                flex-basis: 100%;
+                text-align: center;
+                margin: 0 0 5px 0;
+                font-size: 10px;
+                order: -1;
+            }
+
+            .nav-btn {
+                flex: 1;
+                min-width: 80px;
+                max-width: 120px;
+                font-size: 10px;
+                padding: 4px 6px;
+                min-height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                line-height: 1.1;
+            }
+
+            .nav-btn.supplemental {
+                font-size: 9px;
+            }
+
+            .voice-ai-banner {
+                flex-shrink: 0;
+                width: auto;
+                max-width: 120px;
+                margin: 0;
+                padding: 6px 8px;
+                font-size: 10px;
+                line-height: 1.1;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .subjects-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+        }
+
+        /* Very small landscape screens */
+        @media (max-width: 640px) and (orientation: landscape) {
+            .nav-buttons {
+                max-width: 55%;
+            }
+
+            .nav-btn {
+                min-width: 70px;
+                max-width: 100px;
+                font-size: 9px;
+                padding: 3px 4px;
+            }
+
+            .voice-ai-banner {
+                max-width: 100px;
+                font-size: 9px;
+                padding: 4px 6px;
+            }
+        }
+
+        /* Small mobile devices - Portrait */
+        @media (max-width: 480px) and (orientation: portrait) {
+            .nav-buttons > span {
+                font-size: 10px;
+            }
+
+            .nav-btn {
+                font-size: 10px;
+                padding: 6px 4px;
+                min-height: 32px;
+            }
+
+            .nav-btn.supplemental {
+                font-size: 9px;
+            }
+
+            .voice-ai-banner {
+                font-size: 10px;
+                padding: 8px;
+            }
+
             .products-grid {
                 grid-template-columns: 1fr;
             }
@@ -200,42 +342,105 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
+        }
 
+        /* Small mobile devices - Landscape */
+        @media (max-width: 480px) and (orientation: landscape) {
             .nav-btn {
-                font-size: 11px;
-                padding: 5px 6px;
+                min-width: 60px;
+                max-width: 90px;
+                font-size: 8px;
+                padding: 2px 3px;
             }
 
             .voice-ai-banner {
-                font-size: 11px;
-                padding: 8px;
+                max-width: 90px;
+                font-size: 8px;
+                padding: 3px 5px;
             }
         }
 
         /* Landscape orientation on mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
+        @media (max-height: 500px) and (orientation: landscape) and (max-width: 768px) {
+            .header {
+                padding: 5px 0;
+            }
+
             .header-content {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                gap: 10px;
+            }
+
+            .logo {
+                flex-shrink: 0;
+            }
+
+            .logo-image {
+                max-height: 30px;
             }
 
             .nav-buttons {
+                flex: 1;
                 flex-direction: row;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                padding: 0 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                max-width: 50%;
+                gap: 4px;
+                margin: 0;
+            }
+
+            .nav-buttons > span {
+                flex-basis: 100%;
+                text-align: center;
+                margin: 0 0 3px 0;
+                font-size: 9px;
+                order: -1;
             }
 
             .nav-btn {
-                flex-shrink: 0;
-                font-size: 12px;
+                flex: 1;
+                min-width: 65px;
+                max-width: 85px;
+                font-size: 8px;
+                padding: 2px 4px;
+                min-height: 28px;
+                line-height: 1;
+            }
+
+            .nav-btn.supplemental {
+                font-size: 7px;
             }
 
             .voice-ai-banner {
+                flex-shrink: 0;
                 width: auto;
-                margin-top: 0;
-                margin-left: 10px;
+                max-width: 100px;
+                margin: 0;
+                padding: 4px 6px;
+                font-size: 8px;
+                line-height: 1;
+            }
+
+            .main-content {
+                padding-top: 10px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .subjects-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 8px;
+            }
+
+            .product-card,
+            .subject-card {
+                padding: 8px;
             }
         }
 
@@ -333,12 +538,14 @@
                     </a>
                 </div>
                 <nav class="nav-buttons">
-                    <span style="font-family: 'Gilroy', sans-serif; font-weight: 400; color: #666; margin-right: 10px; align-self: center;">TAP TO LEARN MORE</span>
-                    <button class="nav-btn all active" data-filter="all">All</button>
-                    <button class="nav-btn assessment" data-filter="assessment">Assessment</button>
-                    <button class="nav-btn core" data-filter="core">Core Instruction</button>
-                    <button class="nav-btn supplemental" data-filter="supplemental">Supplemental Instruction</button>
-                    <button class="nav-btn spanish" data-filter="spanish">Spanish Offerings</button>
+                    <span style="font-family: 'Gilroy', sans-serif; font-weight: 400; color: #666;">TAP TO LEARN MORE</span>
+                    <div class="nav-buttons-grid">
+                        <button class="nav-btn all active" data-filter="all">All</button>
+                        <button class="nav-btn assessment" data-filter="assessment">Assessment</button>
+                        <button class="nav-btn core" data-filter="core">Core Instruction</button>
+                        <button class="nav-btn supplemental" data-filter="supplemental">Supplemental Instruction</button>
+                        <button class="nav-btn spanish" data-filter="spanish">Spanish Offerings</button>
+                    </div>
                     <div class="voice-ai-banner" onclick="window.location.href='https://exp.i-ready.com/pageAI.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Learn about Voice AI">
                         Learn about<br>
                         <strong>Voice AI,</strong> coming soon!
@@ -440,7 +647,37 @@
 
     <script src="https://exp.i-ready.com/script.js"></script>
     <script>
-        // Enhanced mobile navigation
+                    // Enhanced mobile navigation with orientation support
+            function updateNavigationLayout() {
+                const navButtons = document.querySelector('.nav-buttons');
+                const navButtonsGrid = document.querySelector('.nav-buttons-grid');
+                const isLandscape = window.innerHeight < window.innerWidth;
+                const isMobile = window.innerWidth <= 768;
+                
+                if (isMobile) {
+                    if (isLandscape) {
+                        // Landscape: flatten structure
+                        if (navButtonsGrid) {
+                            const buttons = navButtonsGrid.querySelectorAll('.nav-btn');
+                            buttons.forEach(btn => {
+                                navButtons.insertBefore(btn, navButtonsGrid);
+                            });
+                            navButtonsGrid.style.display = 'none';
+                        }
+                    } else {
+                        // Portrait: use grid structure
+                        if (navButtonsGrid) {
+                            navButtonsGrid.style.display = 'grid';
+                            const buttons = navButtons.querySelectorAll('.nav-btn:not(.nav-buttons-grid .nav-btn)');
+                            buttons.forEach(btn => {
+                                if (btn.parentNode !== navButtonsGrid) {
+                                    navButtonsGrid.appendChild(btn);
+                                }
+                            });
+                        }
+                    }
+                }
+            }
         document.addEventListener('DOMContentLoaded', function() {
             // Add keyboard navigation support
             const clickableElements = document.querySelectorAll('[onclick]');
@@ -457,12 +694,21 @@
             // Handle orientation changes
             window.addEventListener('orientationchange', function() {
                 setTimeout(function() {
+                    updateNavigationLayout();
                     // Force reflow on orientation change
                     document.body.style.height = window.innerHeight + 'px';
                     setTimeout(function() {
                         document.body.style.height = 'auto';
                     }, 100);
                 }, 100);
+            });
+
+            // Initial layout update
+            updateNavigationLayout();
+
+            // Also handle resize events
+            window.addEventListener('resize', function() {
+                updateNavigationLayout();
             });
 
             // Optimize touch interactions for mobile
