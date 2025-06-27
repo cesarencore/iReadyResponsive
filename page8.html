@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosaico Lectoescritura - Grades K-5</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Gilroy:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-layout {
+            display: flex;
+            margin: 25px 0 15px 0;
+            gap: 34px;
+            min-height: calc(100vh - 200px);
+        }
+        .sidebar {
+            background: transparent;
+            border-radius: 0;
+            padding: 28px;
+            text-align: left;
+            box-shadow: none;
+            transition: none;
+            position: relative;
+            overflow: visible;
+            width: 270px;
+            flex-shrink: 0;
+        }
+        .sidebar:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        .product-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .gradeA {
+            text-align: center;
+            font-family: 'Gilroy', sans-serif;
+            font-weight: 400;
+            font-size: 18px;
+            color: #665;
+            margin-bottom: 30px;
+        }
+        .product-icon {
+            width: 280px;
+            height: 280px;
+            margin-right: 12px;
+        }
+        .nav-menu {
+            list-style: none;
+            margin-top: 25px;
+            text-align: right;
+        }
+        .nav-item {
+            margin-bottom: 6px;
+        }
+        .nav-link {
+            display: block;
+            padding: 25px 20px;
+            font-family: 'Gilroy', sans-serif;
+            font-weight: 300;
+            font-size: 22px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            background: rgba(70, 130, 180, 0.1);
+            color: #4682B4;
+        }
+        .nav-link.active {
+            color: #4682B4;
+            font-weight: 600;
+        }
+
+        /* Email button positioned under nav menu */
+        .email-button-sidebar {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .email-button-sidebar .email-button {
+            position: static;
+            background: #0465A8;
+            color: white;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Gilroy', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(4, 101, 168, 0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-width: 180px;
+        }
+
+        .email-button-sidebar .email-button:hover {
+            background: #5a9bd4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(90, 155, 212, 0.4);
+        }
+
+        .iframe-section {
+            flex: 1;
+            background: transparent;
+            padding: 28px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .iframe-section:hover {
+            /* Removed hover effects */
+        }
+        .iframe-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: transparent;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+        }
+        .content-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+        .image-content {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: transparent;
+            border: 0px solid #ddd;
+            aspect-ratio: 16 / 9;
+        }
+        .content-placeholder {
+            display: none;
+            padding: 40px;
+            color: #666;
+            font-family: 'Gilroy', sans-serif;
+        }
+
+        /* Hide the original fixed email button */
+        .email-button {
+            display: none;
+        }
+
+        .back-arrow {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 80px;
+            height: 80px;
+            background-image: url('img/backButton.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+            clip-path: none;
+            flex-shrink: 0;
+            min-width: 80px;
+            min-height: 80px;
+        }
+
+        .back-arrow:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: none;
+        }
+
+        .back-arrow::before {
+            display: none;
+        }
+        @media (max-width: 1024px) {
+            .page-layout {
+                flex-direction: column;
+                gap: 28px;
+            }
+            .sidebar {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-layout {
+                gap: 20px;
+                margin: 20px 0 10px 0;
+            }
+            .sidebar, .iframe-section {
+                padding: 20px;
+            }
+            .back-arrow {
+                bottom: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+            }
+            .nav-link {
+                font-size: 13px;
+                padding: 8px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none;">
+                        <img src="img/iReadyLogo.svg" alt="i-Ready" class="logo-image">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main-content">
+        <div class="container">
+            <div class="page-layout">
+                <aside class="sidebar">
+                    <div class="product-logo">
+                        <img src="img/mosaico-lectoescritura.svg" alt="Mosaico Lectoescritura" class="product-icon subLogo">
+                    </div>
+                    <div>
+                        <div class="gradeA">Grades K - 5</div>
+                    </div>
+                    <nav>
+                        <ul class="nav-menu">
+                            <li class="nav-item">
+                                <a href="#overview" class="nav-link active">OVERVIEW</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- Email button properly positioned in sidebar -->
+                    <div class="email-button-sidebar">
+                        <button class="email-button">Email Me More Information</button>
+                    </div>
+                </aside>
+                <section class="iframe-section">
+                    <div class="iframe-container">
+                        <!-- Added proper iframe structure that the script expects -->
+                        <iframe 
+                            id="contentFrame"
+                            class="content-iframe"
+                            src="about:blank"
+                            title="Mosaico Lectoescritura Content"
+                            style="display: none;"
+                            allowfullscreen>
+                        </iframe>
+                        <!-- Keep the image as default content -->
+                        <img 
+                            class="image-content" 
+                            src="img/mosaico lectoescritura_overview_A.png"
+                            alt="Mosaico Lectoescritura Overview">
+                    </div>
+                    <div class="content-placeholder">
+                        <p>Select a navigation item to view content</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <div class="back-arrow" onclick="window.location.href='V3-index.html'"></div>
+  
+    <footer class="geometric-footer">
+        <div class="geometric-pattern"></div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

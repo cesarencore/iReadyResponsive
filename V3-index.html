@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-Ready Educational Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Gilroy:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Remove header shadow only on this page */
+        .header {
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none;">
+                        <img src="img/iReadyLogo.svg" alt="i-Ready" class="logo-image">
+                    </a>
+                </div>
+                <nav class="nav-buttons">
+                    <span style="font-family: 'Gilroy', sans-serif; font-weight: 400; color: #666; margin-right: 10px; align-self: center;">TAP TO LEARN MORE</span>
+                    <button class="nav-btn all active" data-filter="all">All</button>
+                    <button class="nav-btn assessment" data-filter="assessment">Assessment</button>
+                    <button class="nav-btn core" data-filter="core">Core Instruction</button>
+                    <button class="nav-btn supplemental" data-filter="supplemental">Supplemental Instruction</button>
+                    <button class="nav-btn spanish" data-filter="spanish">Spanish Offerings</button>
+                    <div class="voice-ai-banner" onclick="window.location.href='pageAI.html'" style="cursor: pointer;">
+                        Learn about<br>
+                        <strong>Voice AI,</strong> coming soon!
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+<section class="products-grid">
+    <!-- Button 1 - Assessment and Spanish Categories -->
+    <article class="product-card" data-category="assessment spanish" onclick="window.location.href='page2.html'" style="cursor: pointer;">
+        <img src="img/iready-assessment.svg" alt="i-Ready Assessment" class="product-image">
+    </article>
+
+    <!-- Button 2 - Supplemental and Spanish Categories -->
+    <article class="product-card" data-category="supplemental spanish" onclick="window.location.href='page3.html'" style="cursor: pointer;">
+        <img src="img/iready-teacher-toolbox.svg" alt="i-Ready Teacher Toolbox" class="product-image">
+    </article>
+
+    <!-- Button 3 - Supplemental and Spanish Categories -->
+    <article class="product-card" data-category="supplemental spanish" onclick="window.location.href='page4.html'" style="cursor: pointer;">
+        <img src="img/iready-personalized-instruction.svg" alt="i-Ready Personalized Instruction" class="product-image">
+    </article>
+
+    <!-- Button 4 - Assessment, Supplemental and Spanish Categories -->
+    <article class="product-card" data-category="assessment supplemental spanish" onclick="window.location.href='page5.html'" style="cursor: pointer;">
+        <img src="img/iready-pro.svg" alt="i-Ready Pro" class="product-image">
+    </article>
+
+    <!-- Button 5 - Assessment Category -->
+    <article class="product-card" data-category="assessment" onclick="window.location.href='page6.html'" style="cursor: pointer;">
+        <img src="img/brigance.svg" alt="BRIGANCE" class="product-image">
+    </article>
+</section>
+
+            <section class="subjects-section">
+                <div class="subjects-grid">
+                    <!-- Button 6 - Supplemental and Spanish Categories -->
+                    <article class="subject-card" data-category="supplemental spanish" onclick="window.location.href='page7.html'" style="cursor: pointer;">
+                        <img src="img/mosaico-fundamentos.svg" alt="Mosaico Fundamentos" class="subject-image">
+                    </article>
+
+                    <!-- Button 7 - Core and Spanish Categories -->
+                    <article class="subject-card" data-category="core spanish" onclick="window.location.href='page8.html'" style="cursor: pointer;">
+                        <img src="img/mosaico-lectoescritura.svg" alt="Mosaico Lectoescritura" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='page9.html'" style="cursor: pointer;">
+                        <img src="img/magnetic-comprehension.svg" alt="Magnetic Comprehension" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='page10.html'" style="cursor: pointer;">
+                        <img src="img/magnetic-foundations.svg" alt="Magnetic Foundations" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="core" onclick="window.location.href='page11.html'" style="cursor: pointer;">
+                        <img src="img/magnetic-literacy.svg" alt="Magnetic Literacy" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='page12.html'" style="cursor: pointer;">
+                        <img src="img/phonics-reading.svg" alt="Phonics for Reading" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="core" onclick="window.location.href='page13.html'" style="cursor: pointer;">
+                        <img src="img/iready-classroom-mathematics-algebra-1_stacked_RGB.svg" alt="Algebra 1" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="core" onclick="window.location.href='page14.html'" style="cursor: pointer;">
+                        <img src="img/classroom mathematics calirornia.svg" alt="Classroom Mathematics California" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="core" onclick="window.location.href='page15.html'" style="cursor: pointer;">
+                        <img src="img/iready-classroom-mathematics.svg" alt="i-Ready Classroom Mathematics" class="subject-image">
+                    </article>
+
+                    <!-- Button 15 - Core and Spanish Categories -->
+                    <article class="subject-card" data-category="core spanish" onclick="window.location.href='page16.html'" style="cursor: pointer;">
+                        <img src="img/iready-classroom-mathematicas.svg" alt="i-Ready Classroom Matemáticas" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='page17.html'" style="cursor: pointer;">
+                        <img src="img/ready-reading.svg" alt="Ready Reading" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='page18.html'" style="cursor: pointer;">
+                        <img src="img/ready-mathematics.svg" alt="Ready Mathematics" class="subject-image">
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="geometric-footer">
+        <div class="geometric-pattern"></div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

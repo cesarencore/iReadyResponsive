@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark 1 - i-Ready Educational Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .splash-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .logo-container {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .main-logo {
+            font-family: 'Arial', sans-serif;
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-family: 'Arial', sans-serif;
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .click-instruction {
+            font-family: 'Arial', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+            text-align: center;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 15px 30px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .click-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        /* Video container - hidden by default */
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            display: none;
+        }
+
+        .fullscreen-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Debug info */
+        .debug-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-family: monospace;
+            font-size: 12px;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 20;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-logo {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .click-instruction {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-container">
+        <div class="debug-info" id="debugInfo">
+            Status: Loading...<br>
+            Video: Checking...
+        </div>
+        
+        <div class="logo-container">
+            <div class="main-logo">i-Ready</div>
+            <div class="subtitle">Educational Platform</div>
+        </div>
+        
+        <div class="click-instruction">
+            Click anywhere to continue
+        </div>
+        
+        <div class="click-overlay" id="clickOverlay"></div>
+    </div>
+
+    <!-- Hidden video container -->
+    <div class="video-container" id="videoContainer">
+        <video 
+            class="fullscreen-video" 
+            id="backgroundVideo"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            preload="auto"
+        >
+            <source src="img/loop.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('backgroundVideo');
+            const videoContainer = document.getElementById('videoContainer');
+            const splashContainer = document.querySelector('.splash-container');
+            const clickOverlay = document.getElementById('clickOverlay');
+            const debugInfo = document.getElementById('debugInfo');
+
+            let videoLoaded = false;
+
+            // Function to navigate to main page
+            function goToMainPage() {
+                console.log('Navigating to V3-index.html');
+                debugInfo.innerHTML = 'Status: Navigating...<br>Video: ' + (videoLoaded ? 'Loaded' : 'Failed');
+                window.location.href = 'V3-index.html';
+            }
+
+            // Try to load video
+            video.addEventListener('loadeddata', function() {
+                videoLoaded = true;
+                videoContainer.style.display = 'block';
+                splashContainer.style.display = 'none';
+                debugInfo.innerHTML = 'Status: Video Ready<br>Video: Loaded ✓';
+                console.log('Video loaded successfully');
+            });
+
+            video.addEventListener('error', function() {
+                videoLoaded = false;
+                debugInfo.innerHTML = 'Status: Video Failed - Using Fallback<br>Video: Not Found ✗<br>File: img/loop.mp4';
+                console.log('Video failed to load: img/loop.mp4');
+            });
+
+            // Click events
+            clickOverlay.addEventListener('click', goToMainPage);
+            document.addEventListener('click', goToMainPage);
+            
+            // Keyboard events
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    goToMainPage();
+                }
+            });
+
+            // Touch events for mobile
+            document.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                goToMainPage();
+            });
+
+            // Update debug info after 2 seconds
+            setTimeout(function() {
+                if (!videoLoaded) {
+                    debugInfo.innerHTML = 'Status: Ready (No Video)<br>Video: Using Gradient Background<br>Click to Continue';
+                }
+            }, 2000);
+
+            // Try to play video if it loads
+            video.addEventListener('canplay', function() {
+                video.play().catch(function(error) {
+                    console.log('Video play failed:', error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

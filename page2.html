@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-Ready Assessment - Grades K-12</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Gilroy:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Optimize for 1920x1080 screens - maximize content area */
+        .page-layout .container {
+            padding: 0 !important;
+            max-width: 100% !important; /* Use full screen width */
+            margin: 0 !important;
+        }
+        
+        .page-layout {
+            display: flex;
+            gap: 35px !important; /* Increased gap for more breathing room */
+            margin: 5px 0 !important; /* Minimal top/bottom margins */
+            min-height: calc(100vh - 150px) !important; /* Use more vertical space */
+        }
+
+        /* Sidebar - optimized size and spacing */
+        .sidebar {
+            background: transparent;
+            border-radius: 0;
+            padding: 20px !important; /* Increased sidebar padding */
+            text-align: left;
+            box-shadow: none;
+            transition: none;
+            position: relative;
+            overflow: visible;
+            width: 220px !important; /* Optimized width */
+            flex-shrink: 0;
+        }
+
+        .sidebar:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .product-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        
+        .gradeA {
+            text-align: center;
+            font-family: 'Gilroy', sans-serif;
+            font-weight: 500 !important; /* Bolder text */
+            font-size: 20px !important; /* Increased font size */
+            color: #665;
+            margin-bottom: 25px !important;
+            margin-top: -60px !important;
+        }
+
+        /* Larger sidebar elements */
+        .product-icon {
+            width: 200px !important; /* Increased size */
+            height: 200px !important;
+            margin-right: 12px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin-top: 25px;
+            text-align: right;
+        }
+
+        .nav-item {
+            margin-bottom: 6px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 20px 15px !important; /* Increased padding */
+            font-family: 'Gilroy', sans-serif;
+            font-weight: 400 !important; /* Slightly bolder */
+            font-size: 24px !important; /* Increased font size */
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(70, 130, 180, 0.1);
+            color: #4682B4;
+        }
+
+        .nav-link.active {
+            color: #4682B4;
+            font-weight: 600;
+        }
+
+        /* Main Content Area - optimized for maximum space */
+        .iframe-section {
+            flex: 1;
+            background: transparent; /* Removed background */
+            border-radius: 0; /* Removed border radius */
+            padding: 20px !important; /* Increased padding around iframe */
+            text-align: center;
+            box-shadow: none; /* Removed box shadow */
+            transition: none; /* Removed transition */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 !important;
+        }
+
+        .iframe-section:hover {
+            transform: none; /* Removed hover transform */
+            box-shadow: none; /* Removed hover shadow */
+        }
+
+        /* iFrame container - maximum size */
+        .iframe-container {
+            width: 100% !important;
+            height: calc(100vh - 180px) !important; /* Use available vertical space */
+            aspect-ratio: unset !important; /* Remove aspect ratio constraint */
+            border: none; /* Removed border */
+            border-radius: 0; /* Removed border radius */
+            overflow: hidden;
+            box-shadow: none; /* Removed box shadow */
+        }
+
+        .content-iframe {
+            width: 100% !important;
+            height: 100% !important;
+            border: none;
+            border-radius: 0; /* Removed border radius */
+        }
+
+        .content-placeholder {
+            display: none;
+        }
+
+        /* Email button positioned in sidebar */
+        .email-button-sidebar {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .email-button-sidebar .email-button {
+            position: static;
+            background: #0465A8; /* CHANGED: from #4682B4 to darker blue */
+            color: white;
+            padding: 18px 25px !important; /* Increased padding */
+            border: none;
+            border-radius: 8px;
+            font-family: 'Gilroy', sans-serif;
+            font-weight: 600 !important; /* Bolder text */
+            font-size: 16px !important; /* Increased font size */
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(4, 101, 168, 0.3); /* CHANGED: to match new color */
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-width: 180px !important;
+        }
+
+        .email-button-sidebar .email-button:hover {
+            background: #5a9bd4; /* Light blue on hover - stays the same */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(90, 155, 212, 0.4); /* CHANGED: to match hover color */
+        }
+
+        /* Hide the original fixed email button */
+        .email-button {
+            display: none;
+        }
+
+        /* Header optimization for more content space */
+        .header {
+            padding: 10px 0 !important;
+        }
+
+        /* Back button with SVG */
+        .back-arrow {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 80px;
+            height: 80px;
+            background-image: url('img/backButton.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: none; /* Removed drop shadow */
+            transition: all 0.3s ease;
+            z-index: 100;
+            clip-path: none; /* Remove clip-path since we're using SVG */
+            flex-shrink: 0;
+            min-width: 80px; /* Prevent shrinking */
+            min-height: 80px; /* Prevent shrinking */
+        }
+
+        .back-arrow:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: none; /* Removed hover shadow */
+        }
+
+        .back-arrow::before {
+            display: none;
+        }
+
+        /* For exactly 1920x1080 screens */
+        @media (min-width: 1920px) and (max-width: 1920px) {
+            .sidebar {
+                width: 240px !important; /* Increased for larger elements */
+            }
+            
+            .iframe-container {
+                height: calc(100vh - 160px) !important; /* Maximize height */
+            }
+            
+            .product-icon {
+                width: 220px !important; /* Even larger on 1920px */
+                height: 220px !important;
+            }
+            
+            .nav-link {
+                font-size: 26px !important; /* Larger text on big screens */
+                padding: 25px 20px !important;
+            }
+            
+            .gradeA {
+                font-size: 22px !important;
+            }
+            
+            .email-button-sidebar .email-button {
+                padding: 20px 30px !important;
+                font-size: 18px !important;
+            }
+        }
+
+        /* Responsive - matching optimized breakpoints */
+        @media (max-width: 1400px) {
+            .sidebar {
+                width: 200px !important;
+            }
+            
+            .iframe-container {
+                height: calc(100vh - 200px) !important;
+            }
+            
+            .product-icon {
+                width: 180px !important;
+                height: 180px !important;
+            }
+            
+            .nav-link {
+                font-size: 22px !important;
+                padding: 18px 12px !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .page-layout {
+                flex-direction: column;
+                gap: 25px !important;
+                margin: 15px 0 15px 0 !important;
+            }
+
+            .sidebar {
+                width: 100% !important;
+                max-width: 100%;
+                padding: 25px !important;
+                text-align: center;
+            }
+            
+            .product-logo {
+                justify-content: center;
+            }
+            
+            .product-icon {
+                width: 180px !important;
+                height: 180px !important;
+            }
+
+            .nav-menu {
+                text-align: center;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 20px;
+            }
+            
+            .nav-item {
+                margin-bottom: 0;
+            }
+            
+            .nav-link {
+                padding: 15px 20px !important;
+                font-size: 18px !important;
+                border: 1px solid rgba(70, 130, 180, 0.2);
+                border-radius: 8px;
+                min-width: 120px;
+            }
+
+            .email-button-sidebar {
+                text-align: center;
+                margin-top: 15px;
+            }
+            
+            .iframe-container {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-layout .container {
+                padding: 0 1px !important;
+            }
+            
+            .page-layout {
+                gap: 20px !important;
+                margin: 10px 0 10px 0 !important;
+            }
+
+            .sidebar {
+                padding: 20px !important;
+            }
+            
+            .product-icon {
+                width: 150px !important;
+                height: 150px !important;
+            }
+            
+            .gradeA {
+                font-size: 18px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .nav-menu {
+                gap: 8px;
+            }
+            
+            .nav-link {
+                font-size: 16px !important;
+                padding: 12px 16px !important;
+                min-width: 100px;
+            }
+
+            .email-button-sidebar .email-button {
+                padding: 15px 20px !important;
+                font-size: 14px !important;
+                min-width: 180px;
+            }
+
+            .back-arrow {
+                bottom: 15px;
+                left: 15px;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .iframe-container {
+                border-radius: 8px;
+                overflow: hidden;
+                min-height: 250px;
+            }
+
+            .iframe-section {
+                padding: 10px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-layout .container {
+                padding: 0 3px !important;
+            }
+            
+            .page-layout {
+                gap: 15px !important;
+                margin: 5px 0 5px 0 !important;
+            }
+
+            .sidebar {
+                padding: 15px !important;
+            }
+            
+            .product-icon {
+                width: 120px !important;
+                height: 120px !important;
+            }
+            
+            .gradeA {
+                font-size: 16px !important;
+                margin-bottom: 15px !important;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+            
+            .nav-link {
+                font-size: 14px !important;
+                padding: 10px 15px !important;
+                width: 100%;
+                max-width: 200px;
+                text-align: center;
+            }
+
+            .email-button-sidebar .email-button {
+                padding: 12px 20px !important;
+                font-size: 13px !important;
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .back-arrow {
+                bottom: 10px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .iframe-container {
+                min-height: 200px;
+                aspect-ratio: 4 / 3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none;">
+                        <img src="img/iReadyLogo.svg" alt="i-Ready" class="logo-image">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-layout">
+                <aside class="sidebar">
+                    <div class="product-logo">
+                        <img src="img/iready-assessment.svg" alt="i-Ready Assessment" class="product-icon subLogo">
+                    </div>
+                    
+                    <div>
+                        <div class="gradeA">
+                            Grades K - 12
+                        </div>
+                    </div>
+
+                    <nav>
+                        <ul class="nav-menu">
+                            <li class="nav-item">
+                                <a href="#overview" class="nav-link active">OVERVIEW</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#math-tour" class="nav-link">MATH TOUR</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#reading-tour" class="nav-link">READING TOUR</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Email button moved here under the nav menu -->
+                    <div class="email-button-sidebar">
+                        <button class="email-button">Email Me This Brochure</button>
+                    </div>
+                </aside>
+
+                <section class="iframe-section">
+                    <div class="iframe-container">
+                        <iframe 
+                            id="contentFrame"
+                            class="content-iframe" 
+                            src="https://online.flippingbook.com/view/634657302/"
+                            title="i-Ready Assessment Content"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="content-placeholder">
+                        <p>Select a navigation item to view content</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div class="back-arrow" onclick="window.location.href='V3-index.html'"></div>
+
+    <footer class="geometric-footer">
+        <div class="geometric-pattern"></div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
