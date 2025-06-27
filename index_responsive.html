@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark 1 - i-Ready Educational Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            cursor: pointer;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .splash-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .logo-container {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            z-index: 15;
+        }
+
+        .main-logo {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 4vw, 1.5rem);
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .click-instruction {
+            font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+            color: white;
+            text-align: center;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: clamp(10px, 3vw, 15px) clamp(20px, 6vw, 30px);
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 15;
+            position: relative;
+            max-width: 90%;
+        }
+
+        .click-instruction:hover {
+            transform: scale(1.05);
+            opacity: 1;
+            background: rgba(255,255,255,0.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 0.8; 
+                transform: scale(1); 
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1.02); 
+            }
+        }
+
+        .click-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        /* Video container - hidden by default */
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            display: none;
+        }
+
+        .fullscreen-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Debug info */
+        .debug-info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-family: monospace;
+            font-size: clamp(10px, 2.5vw, 12px);
+            background: rgba(0,0,0,0.7);
+            padding: clamp(5px, 2vw, 10px);
+            border-radius: 5px;
+            z-index: 20;
+            max-width: calc(100% - 20px);
+            word-wrap: break-word;
+        }
+
+        /* Loading animation */
+        .loading-spinner {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 15;
+        }
+
+        @keyframes spin {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            100% { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        /* Mobile-specific optimizations */
+        @media (max-width: 768px) {
+            .splash-container {
+                padding: 15px;
+            }
+            
+            .logo-container {
+                margin-bottom: 30px;
+            }
+            
+            .debug-info {
+                top: 5px;
+                left: 5px;
+                font-size: 10px;
+                padding: 5px;
+                max-width: calc(100% - 10px);
+            }
+            
+            .loading-spinner {
+                bottom: 30px;
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        /* Landscape mobile orientation */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .splash-container {
+                padding: 10px;
+            }
+            
+            .logo-container {
+                margin-bottom: 20px;
+            }
+            
+            .main-logo {
+                font-size: clamp(1.8rem, 6vw, 2.5rem);
+                margin-bottom: 10px;
+            }
+            
+            .subtitle {
+                font-size: clamp(0.8rem, 3vw, 1rem);
+                margin-bottom: 20px;
+            }
+            
+            .click-instruction {
+                font-size: clamp(0.8rem, 3vw, 1rem);
+                padding: 8px 16px;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .main-logo,
+            .subtitle,
+            .click-instruction {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            .click-instruction {
+                animation: none;
+            }
+            
+            .loading-spinner {
+                animation: none;
+            }
+            
+            * {
+                transition: none !important;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .click-instruction:focus {
+            outline: 3px solid rgba(255,255,255,0.8);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-container">
+        <div class="debug-info" id="debugInfo">
+            Status: Loading...<br>
+            Video: Checking...
+        </div>
+        
+        <div class="logo-container">
+            <div class="main-logo">i-Ready</div>
+            <div class="subtitle">Educational Platform</div>
+        </div>
+        
+        <div class="click-instruction" tabindex="0" role="button" aria-label="Click to continue to main application">
+            Click anywhere to continue
+        </div>
+        
+        <div class="loading-spinner" id="loadingSpinner"></div>
+        
+        <div class="click-overlay" id="clickOverlay"></div>
+    </div>
+
+    <!-- Hidden video container -->
+    <div class="video-container" id="videoContainer">
+        <video 
+            class="fullscreen-video" 
+            id="backgroundVideo"
+            autoplay 
+            muted 
+            loop 
+            playsinline
+            preload="auto"
+        >
+            <source src="https://exp.i-ready.com/img/loop.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('backgroundVideo');
+            const videoContainer = document.getElementById('videoContainer');
+            const splashContainer = document.querySelector('.splash-container');
+            const clickOverlay = document.getElementById('clickOverlay');
+            const debugInfo = document.getElementById('debugInfo');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const clickInstruction = document.querySelector('.click-instruction');
+
+            let videoLoaded = false;
+            let pageReady = false;
+
+            // Function to navigate to main page
+            function goToMainPage() {
+                if (!pageReady) return; // Prevent multiple rapid clicks
+                
+                console.log('Navigating to V3-index.html');
+                debugInfo.innerHTML = 'Status: Navigating...<br>Video: ' + (videoLoaded ? 'Loaded' : 'Failed');
+                
+                // Add loading state
+                clickInstruction.style.opacity = '0.5';
+                clickInstruction.innerHTML = 'Loading...';
+                
+                // Navigate with absolute URL
+                window.location.href = 'https://exp.i-ready.com/V3-index.html';
+            }
+
+            // Initialize page
+            function initializePage() {
+                pageReady = true;
+                loadingSpinner.style.display = 'none';
+                
+                // Update debug info
+                if (!videoLoaded) {
+                    debugInfo.innerHTML = 'Status: Ready (No Video)<br>Video: Using Gradient Background<br>Click to Continue';
+                }
+            }
+
+            // Video loading handlers
+            video.addEventListener('loadeddata', function() {
+                videoLoaded = true;
+                videoContainer.style.display = 'block';
+                splashContainer.style.display = 'none';
+                debugInfo.innerHTML = 'Status: Video Ready<br>Video: Loaded ✓';
+                console.log('Video loaded successfully');
+                initializePage();
+            });
+
+            video.addEventListener('error', function() {
+                videoLoaded = false;
+                debugInfo.innerHTML = 'Status: Video Failed - Using Fallback<br>Video: Not Found ✗<br>File: https://exp.i-ready.com/img/loop.mp4';
+                console.log('Video failed to load: https://exp.i-ready.com/img/loop.mp4');
+                initializePage();
+            });
+
+            // Click events
+            clickOverlay.addEventListener('click', goToMainPage);
+            clickInstruction.addEventListener('click', goToMainPage);
+            
+            // Keyboard events
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    goToMainPage();
+                }
+            });
+
+            // Focus events for accessibility
+            clickInstruction.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    goToMainPage();
+                }
+            });
+
+            // Touch events for mobile (with improved handling)
+            let touchStartTime = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartTime = Date.now();
+            }, { passive: true });
+            
+            document.addEventListener('touchend', function(e) {
+                const touchDuration = Date.now() - touchStartTime;
+                
+                // Only trigger if it's a quick tap (not a long press or scroll)
+                if (touchDuration < 500) {
+                    e.preventDefault();
+                    goToMainPage();
+                }
+            }, { passive: false });
+
+            // Initialize after a short delay to ensure everything is loaded
+            setTimeout(function() {
+                if (!videoLoaded) {
+                    initializePage();
+                }
+            }, 2000);
+
+            // Try to play video if it loads
+            video.addEventListener('canplay', function() {
+                video.play().catch(function(error) {
+                    console.log('Video play failed:', error);
+                });
+            });
+
+            // Handle orientation changes
+            window.addEventListener('orientationchange', function() {
+                setTimeout(function() {
+                    // Force a reflow to handle orientation change properly
+                    document.body.style.height = window.innerHeight + 'px';
+                    setTimeout(function() {
+                        document.body.style.height = '100%';
+                    }, 100);
+                }, 100);
+            });
+
+            // Handle viewport changes (especially on mobile)
+            function handleViewportChange() {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+
+            window.addEventListener('resize', handleViewportChange);
+            handleViewportChange(); // Call once on load
+        });
+    </script>
+</body>
+</html>
