@@ -72,12 +72,26 @@
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border-radius: 8px;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             order: 1;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
         }
 
         .voice-ai-banner:hover {
             transform: translateY(-2px);
+            background: linear-gradient(135deg, #5a67d8, #6b46c1);
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .voice-ai-banner:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
         }
 
         /* Products grid responsive */
@@ -226,60 +240,104 @@
 
         /* Mobile Landscape - Horizontal orientation */
         @media (max-width: 768px) and (orientation: landscape) {
+            .header {
+                padding: 8px 0;
+            }
+
             .header-content {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
-                gap: 15px;
+                gap: 10px;
             }
 
             .logo {
                 flex-shrink: 0;
+                min-width: 80px;
+            }
+
+            .logo-image {
+                max-height: 35px;
             }
 
             .nav-buttons {
                 flex: 1;
+                display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
-                max-width: 60%;
+                align-items: center;
                 gap: 6px;
+                margin: 0 10px;
             }
 
             .nav-buttons > span {
                 flex-basis: 100%;
                 text-align: center;
-                margin: 0 0 5px 0;
-                font-size: 10px;
+                margin: 0 0 4px 0;
+                font-size: 9px;
                 order: -1;
+                color: #666;
+                font-weight: 500;
+            }
+
+            /* Responsive button container for landscape */
+            .nav-buttons-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 4px;
+                width: 100%;
             }
 
             .nav-btn {
                 flex: 1;
-                min-width: 80px;
-                max-width: 120px;
-                font-size: 10px;
-                padding: 4px 6px;
+                min-width: 70px;
+                max-width: 100px;
+                font-size: 9px;
+                padding: 6px 4px;
                 min-height: 32px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
                 line-height: 1.1;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .nav-btn.supplemental {
-                font-size: 9px;
+                font-size: 8px;
+                min-width: 85px;
             }
 
             .voice-ai-banner {
                 flex-shrink: 0;
                 width: auto;
-                max-width: 120px;
+                min-width: 90px;
+                max-width: 110px;
                 margin: 0;
                 padding: 6px 8px;
-                font-size: 10px;
+                font-size: 9px;
                 line-height: 1.1;
+                min-height: 32px;
+                background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+                border: 1px solid #7c3aed;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .voice-ai-banner:hover {
+                background: linear-gradient(135deg, #7c3aed, #6b21a8);
+                border-color: #6b21a8;
+                transform: translateY(-1px);
+                box-shadow: 0 3px 10px rgba(139, 92, 246, 0.4);
             }
 
             .products-grid {
@@ -296,20 +354,29 @@
         /* Very small landscape screens */
         @media (max-width: 640px) and (orientation: landscape) {
             .nav-buttons {
-                max-width: 55%;
+                margin: 0 5px;
+                gap: 3px;
             }
 
             .nav-btn {
-                min-width: 70px;
-                max-width: 100px;
-                font-size: 9px;
-                padding: 3px 4px;
+                min-width: 60px;
+                max-width: 85px;
+                font-size: 8px;
+                padding: 4px 3px;
+                min-height: 28px;
+            }
+
+            .nav-btn.supplemental {
+                font-size: 7px;
+                min-width: 75px;
             }
 
             .voice-ai-banner {
-                max-width: 100px;
-                font-size: 9px;
+                min-width: 75px;
+                max-width: 95px;
+                font-size: 8px;
                 padding: 4px 6px;
+                min-height: 28px;
             }
         }
 
@@ -346,101 +413,156 @@
 
         /* Small mobile devices - Landscape */
         @media (max-width: 480px) and (orientation: landscape) {
-            .nav-btn {
+            .header-content {
+                gap: 5px;
+            }
+
+            .logo {
                 min-width: 60px;
-                max-width: 90px;
-                font-size: 8px;
-                padding: 2px 3px;
+            }
+
+            .nav-buttons {
+                margin: 0 5px;
+                gap: 2px;
+            }
+
+            .nav-btn {
+                min-width: 50px;
+                max-width: 65px;
+                font-size: 6px;
+                padding: 2px 1px;
+                min-height: 24px;
+            }
+
+            .nav-btn.supplemental {
+                font-size: 5px;
+                min-width: 60px;
             }
 
             .voice-ai-banner {
-                max-width: 90px;
-                font-size: 8px;
-                padding: 3px 5px;
+                min-width: 60px;
+                max-width: 75px;
+                font-size: 6px;
+                padding: 2px 4px;
+                min-height: 24px;
+                background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+                border: 1px solid #7c3aed;
+            }
+
+            .voice-ai-banner:hover {
+                background: linear-gradient(135deg, #7c3aed, #6b21a8);
             }
         }
 
         /* Landscape orientation on mobile */
         @media (max-height: 500px) and (orientation: landscape) and (max-width: 768px) {
             .header {
-                padding: 5px 0;
+                padding: 4px 0;
             }
 
             .header-content {
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
-                gap: 10px;
+                gap: 8px;
             }
 
             .logo {
                 flex-shrink: 0;
+                min-width: 70px;
             }
 
             .logo-image {
-                max-height: 30px;
+                max-height: 28px;
             }
 
             .nav-buttons {
                 flex: 1;
+                display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
-                max-width: 50%;
-                gap: 4px;
-                margin: 0;
+                align-items: center;
+                gap: 3px;
+                margin: 0 8px;
             }
 
             .nav-buttons > span {
                 flex-basis: 100%;
                 text-align: center;
-                margin: 0 0 3px 0;
-                font-size: 9px;
+                margin: 0 0 2px 0;
+                font-size: 8px;
                 order: -1;
+                color: #666;
             }
 
             .nav-btn {
                 flex: 1;
-                min-width: 65px;
-                max-width: 85px;
-                font-size: 8px;
-                padding: 2px 4px;
-                min-height: 28px;
+                min-width: 55px;
+                max-width: 75px;
+                font-size: 7px;
+                padding: 3px 2px;
+                min-height: 26px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
                 line-height: 1;
+                border-radius: 4px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .nav-btn.supplemental {
-                font-size: 7px;
+                font-size: 6px;
+                min-width: 65px;
             }
 
             .voice-ai-banner {
                 flex-shrink: 0;
                 width: auto;
-                max-width: 100px;
+                min-width: 70px;
+                max-width: 85px;
                 margin: 0;
-                padding: 4px 6px;
-                font-size: 8px;
+                padding: 3px 5px;
+                font-size: 7px;
                 line-height: 1;
+                min-height: 26px;
+                background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+                border: 1px solid #7c3aed;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .voice-ai-banner:hover {
+                background: linear-gradient(135deg, #7c3aed, #6b21a8);
+                border-color: #6b21a8;
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
             }
 
             .main-content {
-                padding-top: 10px;
+                padding-top: 8px;
             }
 
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 8px;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
 
             .subjects-grid {
                 grid-template-columns: repeat(5, 1fr);
-                gap: 8px;
+                gap: 6px;
             }
 
             .product-card,
             .subject-card {
-                padding: 8px;
+                padding: 6px;
             }
         }
 
@@ -656,27 +778,53 @@
                 
                 if (isMobile) {
                     if (isLandscape) {
-                        // Landscape: flatten structure
+                        // Landscape: create responsive button container
                         if (navButtonsGrid) {
                             const buttons = navButtonsGrid.querySelectorAll('.nav-btn');
+                            const container = document.createElement('div');
+                            container.className = 'nav-buttons-container';
+                            
                             buttons.forEach(btn => {
-                                navButtons.insertBefore(btn, navButtonsGrid);
+                                container.appendChild(btn);
                             });
+                            
+                            navButtons.insertBefore(container, navButtonsGrid);
                             navButtonsGrid.style.display = 'none';
                         }
                     } else {
                         // Portrait: use grid structure
-                        if (navButtonsGrid) {
-                            navButtonsGrid.style.display = 'grid';
-                            const buttons = navButtons.querySelectorAll('.nav-btn:not(.nav-buttons-grid .nav-btn)');
+                        const container = navButtons.querySelector('.nav-buttons-container');
+                        if (container && navButtonsGrid) {
+                            const buttons = container.querySelectorAll('.nav-btn');
                             buttons.forEach(btn => {
-                                if (btn.parentNode !== navButtonsGrid) {
-                                    navButtonsGrid.appendChild(btn);
-                                }
+                                navButtonsGrid.appendChild(btn);
                             });
+                            container.remove();
+                            navButtonsGrid.style.display = 'grid';
                         }
                     }
                 }
+            }
+
+            // Add responsive button behavior for landscape
+            function setupResponsiveButtons() {
+                const navBtns = document.querySelectorAll('.nav-btn');
+                const voiceAI = document.querySelector('.voice-ai-banner');
+                
+                // Add touch feedback for all buttons
+                [...navBtns, voiceAI].forEach(btn => {
+                    if (btn) {
+                        btn.addEventListener('touchstart', function() {
+                            this.style.transform = 'scale(0.95)';
+                        }, { passive: true });
+                        
+                        btn.addEventListener('touchend', function() {
+                            setTimeout(() => {
+                                this.style.transform = '';
+                            }, 100);
+                        }, { passive: true });
+                    }
+                });
             }
         document.addEventListener('DOMContentLoaded', function() {
             // Add keyboard navigation support
@@ -703,12 +851,14 @@
                 }, 100);
             });
 
-            // Initial layout update
+            // Initial setup
             updateNavigationLayout();
+            setupResponsiveButtons();
 
             // Also handle resize events
             window.addEventListener('resize', function() {
                 updateNavigationLayout();
+                setupResponsiveButtons();
             });
 
             // Optimize touch interactions for mobile
