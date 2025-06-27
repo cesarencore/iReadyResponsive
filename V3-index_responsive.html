@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-Ready Educational Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Gilroy:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://exp.i-ready.com/styles.css">
+    <style>
+        /* Remove header shadow only on this page */
+        .header {
+            box-shadow: none !important;
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        .container {
+            padding: 0 15px;
+        }
+
+        /* Header responsive improvements */
+        .header-content {
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-image {
+            max-height: 40px;
+            width: auto;
+        }
+
+        .nav-buttons {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            padding: 8px 12px;
+            font-size: 14px;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .voice-ai-banner {
+            padding: 8px 12px;
+            font-size: 12px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .voice-ai-banner:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Products grid responsive */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            max-width: 100%;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Subjects grid responsive */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1.2;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        }
+
+        .subject-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Mobile-specific optimizations */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 10px;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-buttons > span {
+                width: 100%;
+                text-align: center;
+                margin: 5px 0;
+                font-size: 12px;
+            }
+
+            .nav-btn {
+                flex: 1;
+                min-width: calc(50% - 4px);
+                max-width: 120px;
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+
+            .voice-ai-banner {
+                width: 100%;
+                margin-top: 10px;
+                padding: 10px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-bottom: 30px;
+            }
+
+            .product-card {
+                padding: 15px;
+            }
+
+            .product-image {
+                max-height: 120px;
+            }
+
+            .subjects-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .subject-card {
+                padding: 10px;
+                aspect-ratio: 1.1;
+            }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .subjects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .nav-btn {
+                font-size: 11px;
+                padding: 5px 6px;
+            }
+
+            .voice-ai-banner {
+                font-size: 11px;
+                padding: 8px;
+            }
+        }
+
+        /* Landscape orientation on mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .nav-buttons {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 0 10px;
+            }
+
+            .nav-btn {
+                flex-shrink: 0;
+                font-size: 12px;
+            }
+
+            .voice-ai-banner {
+                width: auto;
+                margin-top: 0;
+                margin-left: 10px;
+            }
+        }
+
+        /* Tablet optimizations */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .subjects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .subjects-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Accessibility improvements */
+        .product-card:focus,
+        .subject-card:focus {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        /* Loading states */
+        .product-card img,
+        .subject-card img {
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card img:not([src]),
+        .subject-card img:not([src]) {
+            opacity: 0;
+        }
+
+        /* Touch-friendly interactions */
+        @media (hover: none) and (pointer: coarse) {
+            .product-card:hover,
+            .subject-card:hover {
+                transform: none;
+            }
+
+            .product-card:active,
+            .subject-card:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* Geometric footer responsive */
+        .geometric-footer {
+            margin-top: 40px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .geometric-footer {
+                height: 150px;
+                margin-top: 30px;
+            }
+        }
+
+        /* Filter animation improvements */
+        .product-card,
+        .subject-card {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.3s ease, opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .product-card.hidden,
+        .subject-card.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="https://exp.i-ready.com/index.html" style="text-decoration: none;">
+                        <img src="https://exp.i-ready.com/img/iReadyLogo.svg" alt="i-Ready" class="logo-image">
+                    </a>
+                </div>
+                <nav class="nav-buttons">
+                    <span style="font-family: 'Gilroy', sans-serif; font-weight: 400; color: #666; margin-right: 10px; align-self: center;">TAP TO LEARN MORE</span>
+                    <button class="nav-btn all active" data-filter="all">All</button>
+                    <button class="nav-btn assessment" data-filter="assessment">Assessment</button>
+                    <button class="nav-btn core" data-filter="core">Core Instruction</button>
+                    <button class="nav-btn supplemental" data-filter="supplemental">Supplemental Instruction</button>
+                    <button class="nav-btn spanish" data-filter="spanish">Spanish Offerings</button>
+                    <div class="voice-ai-banner" onclick="window.location.href='https://exp.i-ready.com/pageAI.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Learn about Voice AI">
+                        Learn about<br>
+                        <strong>Voice AI,</strong> coming soon!
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+<section class="products-grid">
+    <!-- Button 1 - Assessment and Spanish Categories -->
+    <article class="product-card" data-category="assessment spanish" onclick="window.location.href='https://exp.i-ready.com/page2.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="i-Ready Assessment">
+        <img src="https://exp.i-ready.com/img/iready-assessment.svg" alt="i-Ready Assessment" class="product-image">
+    </article>
+
+    <!-- Button 2 - Supplemental and Spanish Categories -->
+    <article class="product-card" data-category="supplemental spanish" onclick="window.location.href='https://exp.i-ready.com/page3.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="i-Ready Teacher Toolbox">
+        <img src="https://exp.i-ready.com/img/iready-teacher-toolbox.svg" alt="i-Ready Teacher Toolbox" class="product-image">
+    </article>
+
+    <!-- Button 3 - Supplemental and Spanish Categories -->
+    <article class="product-card" data-category="supplemental spanish" onclick="window.location.href='https://exp.i-ready.com/page4.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="i-Ready Personalized Instruction">
+        <img src="https://exp.i-ready.com/img/iready-personalized-instruction.svg" alt="i-Ready Personalized Instruction" class="product-image">
+    </article>
+
+    <!-- Button 4 - Assessment, Supplemental and Spanish Categories -->
+    <article class="product-card" data-category="assessment supplemental spanish" onclick="window.location.href='https://exp.i-ready.com/page5.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="i-Ready Pro">
+        <img src="https://exp.i-ready.com/img/iready-pro.svg" alt="i-Ready Pro" class="product-image">
+    </article>
+
+    <!-- Button 5 - Assessment Category -->
+    <article class="product-card" data-category="assessment" onclick="window.location.href='https://exp.i-ready.com/page6.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="BRIGANCE">
+        <img src="https://exp.i-ready.com/img/brigance.svg" alt="BRIGANCE" class="product-image">
+    </article>
+</section>
+
+            <section class="subjects-section">
+                <div class="subjects-grid">
+                    <!-- Button 6 - Supplemental and Spanish Categories -->
+                    <article class="subject-card" data-category="supplemental spanish" onclick="window.location.href='https://exp.i-ready.com/page7.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Mosaico Fundamentos">
+                        <img src="https://exp.i-ready.com/img/mosaico-fundamentos.svg" alt="Mosaico Fundamentos" class="subject-image">
+                    </article>
+
+                    <!-- Button 7 - Core and Spanish Categories -->
+                    <article class="subject-card" data-category="core spanish" onclick="window.location.href='https://exp.i-ready.com/page8.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Mosaico Lectoescritura">
+                        <img src="https://exp.i-ready.com/img/mosaico-lectoescritura.svg" alt="Mosaico Lectoescritura" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='https://exp.i-ready.com/page9.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Magnetic Comprehension">
+                        <img src="https://exp.i-ready.com/img/magnetic-comprehension.svg" alt="Magnetic Comprehension" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='https://exp.i-ready.com/page10.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Magnetic Foundations">
+                        <img src="https://exp.i-ready.com/img/magnetic-foundations.svg" alt="Magnetic Foundations" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="core" onclick="window.location.href='https://exp.i-ready.com/page11.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Magnetic Literacy">
+                        <img src="https://exp.i-ready.com/img/magnetic-literacy.svg" alt="Magnetic Literacy" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='https://exp.i-ready.com/page12.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Phonics for Reading">
+                        <img src="https://exp.i-ready.com/img/phonics-reading.svg" alt="Phonics for Reading" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="core" onclick="window.location.href='https://exp.i-ready.com/page13.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Algebra 1">
+                        <img src="https://exp.i-ready.com/img/iready-classroom-mathematics-algebra-1_stacked_RGB.svg" alt="Algebra 1" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="core" onclick="window.location.href='https://exp.i-ready.com/page14.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Classroom Mathematics California">
+                        <img src="https://exp.i-ready.com/img/classroom mathematics calirornia.svg" alt="Classroom Mathematics California" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="core" onclick="window.location.href='https://exp.i-ready.com/page15.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="i-Ready Classroom Mathematics">
+                        <img src="https://exp.i-ready.com/img/iready-classroom-mathematics.svg" alt="i-Ready Classroom Mathematics" class="subject-image">
+                    </article>
+
+                    <!-- Button 15 - Core and Spanish Categories -->
+                    <article class="subject-card" data-category="core spanish" onclick="window.location.href='https://exp.i-ready.com/page16.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="i-Ready Classroom Matemáticas">
+                        <img src="https://exp.i-ready.com/img/iready-classroom-mathematicas.svg" alt="i-Ready Classroom Matemáticas" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='https://exp.i-ready.com/page17.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Ready Reading">
+                        <img src="https://exp.i-ready.com/img/ready-reading.svg" alt="Ready Reading" class="subject-image">
+                    </article>
+
+                    <article class="subject-card" data-category="supplemental" onclick="window.location.href='https://exp.i-ready.com/page18.html'" style="cursor: pointer;" tabindex="0" role="button" aria-label="Ready Mathematics">
+                        <img src="https://exp.i-ready.com/img/ready-mathematics.svg" alt="Ready Mathematics" class="subject-image">
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="geometric-footer">
+        <div class="geometric-pattern"></div>
+    </footer>
+
+    <script src="https://exp.i-ready.com/script.js"></script>
+    <script>
+        // Enhanced mobile navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add keyboard navigation support
+            const clickableElements = document.querySelectorAll('[onclick]');
+            
+            clickableElements.forEach(element => {
+                element.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
+                    }
+                });
+            });
+
+            // Handle orientation changes
+            window.addEventListener('orientationchange', function() {
+                setTimeout(function() {
+                    // Force reflow on orientation change
+                    document.body.style.height = window.innerHeight + 'px';
+                    setTimeout(function() {
+                        document.body.style.height = 'auto';
+                    }, 100);
+                }, 100);
+            });
+
+            // Optimize touch interactions for mobile
+            if ('ontouchstart' in window) {
+                document.body.classList.add('touch-device');
+                
+                // Add touch feedback
+                const cards = document.querySelectorAll('.product-card, .subject-card');
+                cards.forEach(card => {
+                    card.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                    }, { passive: true });
+                    
+                    card.addEventListener('touchend', function() {
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }, { passive: true });
+                });
+            }
+
+            // Lazy loading for images
+            const images = document.querySelectorAll('img');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.opacity = '1';
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => {
+                img.style.opacity = '0';
+                img.addEventListener('load', () => {
+                    img.style.opacity = '1';
+                });
+                imageObserver.observe(img);
+            });
+        });
+    </script>
+</body>
+</html>
